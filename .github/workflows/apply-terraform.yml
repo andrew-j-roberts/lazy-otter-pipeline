@@ -1,0 +1,37 @@
+name: Apply Terraform Configuration
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    name: Apply Terraform Configuration
+    steps:
+      # checkout main branch of lazy-otter-pipeline
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # build/update cloud infrastructure
+      - name: Apply Terraform
+        run: |
+          cd terraform
+          terraform init
+          terraform fmt -check
+          terraform plan
+          terraform apply -auto-approve
+        env:
+          # https://www.terraform.io/docs/commands/environment-variables.html#tf_var_name
+          TF_VAR_SOLACE_USERNAME: ${{ secrets.SOLACE_USERNAME }}
+          TF_VAR_SOLACE_PASSWORD: ${{ secrets.SOLACE_PASSWORD }}
+          TF_VAR_SOLACE_MESSAGE_VPN: ${{ secrets.SOLACE_MESSAGE_VPN }}
+          TF_VAR_SOLACE_HOST_AMQP: ${{ secrets.SOLACE_HOST_AMQP }}
+          TF_VAR_SOLACE_HOST_MQTT: ${{ secrets.SOLACE_HOST_MQTT }}
+          TF_VAR_SOLACE_HOST_MQTT_WSS: ${{ secrets.SOLACE_HOST_MQTT_WSS }}
+          TF_VAR_SOLACE_HOST_REST: ${{ secrets.SOLACE_HOST_REST }}
+          TF_VAR_SOLACE_HOST_SMF: ${{ secrets.SOLACE_HOST_SMF }}
+          TF_VAR_SOLACE_HOST_WSS: ${{ secrets.SOLACE_HOST_WSS }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_TF_AGENT }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_TF_AGENT }}
