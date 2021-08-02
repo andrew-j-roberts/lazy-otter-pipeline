@@ -1,7 +1,8 @@
 ![Lazy Otter Pipeline](./_docs/architecture-diagram.png)
 
 
-This repo contains the source code for a CI/CD pipeline that helps you run containerized apps in AWS. To use this pipeline you'll need to set up a repo in your GitHub organization with your own secrets. The documentation and available services—both the list below in the docs as well as all the directories in [terraform/modules/services](terraform/modules/services) except for [_template](terraform/modules/services/_template)—are just examples and should be deleted once you set up your 
+This repo contains the source code for a CI/CD pipeline that helps you run containerized apps in AWS. To use this pipeline you'll need to set up a repo in your GitHub organization with your own secrets. The documentation and available services (i.e. both the Available services list below in the docs as well as all the directories in [terraform/modules/services](terraform/modules/services) except for [_template](terraform/modules/services/_template)) are just examples and should be deleted once you set up your own repo.
+
 # Table of contents
 
 - [Available services](#available-services)
